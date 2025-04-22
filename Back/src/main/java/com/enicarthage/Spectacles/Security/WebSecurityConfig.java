@@ -43,11 +43,17 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/password/**").permitAll()
+                        .requestMatchers("/api/spectacles").permitAll()
+                        .requestMatchers("/api/billets").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/api/images/**").permitAll()
+                        .requestMatchers("/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider());
+                //.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

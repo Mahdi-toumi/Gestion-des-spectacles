@@ -28,6 +28,35 @@ public class Spectacle {
 
     @Column(name = "NBRSPECTATEUR", nullable = false)
     private Integer nbSpectateurs;
+    @Column(name = "IMAGE_PATH", length = 255)
+    private String imagePath;
+
+    @Column(name = "IMAGE_PATHVERTICAL", length = 255)
+    private String imagePathVertical;
+
+    public String getImagePathVertical() {
+        return imagePathVertical;
+    }
+
+    public Lieu getLieu() {
+        return lieu;
+    }
+
+    public void setImagePathVertical(String imagePathVertical) {
+        this.imagePathVertical = imagePathVertical;
+    }
+
+    public void setLieu(Lieu lieu) {
+        this.lieu = lieu;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @ManyToOne
     @JoinColumn(name = "IDLIEU", nullable = false)

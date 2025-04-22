@@ -23,8 +23,18 @@ public class Billet {
     private Spectacle spectacle;
 
     @Column(name = "VENDU", nullable = false)
-    private Boolean vendu;
+    private String vendu;
 
+    @Column(name = "NBRERESTANT", nullable = false)
+    private Integer nbrerestant;
+
+    public Integer getNbrerestant() {
+        return nbrerestant;
+    }
+
+    public void setNbrerestant(Integer nbrerestant) {
+        this.nbrerestant = nbrerestant;
+    }
     public Long getId() {
         return id;
     }
@@ -57,11 +67,11 @@ public class Billet {
         this.spectacle = spectacle;
     }
 
-    public Boolean getVendu() {
+    public String getVendu() {
         return vendu;
     }
 
-    public void setVendu(Boolean vendu) {
+    public void setVendu(String vendu) {
         this.vendu = vendu;
     }
 

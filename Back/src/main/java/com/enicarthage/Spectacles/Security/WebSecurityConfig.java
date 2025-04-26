@@ -47,6 +47,13 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/billets").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/api/images/**").permitAll()
+
+                        .requestMatchers("/api/spectacles/byTitreAndLieu").permitAll()
+                        .requestMatchers("/api/spectacles/grouped-by-titre").permitAll()
+
+                        .requestMatchers("/api/spectacles/grouped").permitAll()
+                        .requestMatchers("/api/spectacles/").permitAll()
+
                         .requestMatchers("/**").permitAll()
 
                         .anyRequest().authenticated()

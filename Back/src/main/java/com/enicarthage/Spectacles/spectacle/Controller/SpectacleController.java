@@ -1,8 +1,11 @@
 package com.enicarthage.Spectacles.spectacle.Controller;
 
 import com.enicarthage.Spectacles.spectacle.Model.Spectacle;
+import com.enicarthage.Spectacles.spectacle.Model.SpectacleGroupDTO;
+import com.enicarthage.Spectacles.spectacle.Model.SpectacleGroupedByTitreDto;
 import com.enicarthage.Spectacles.spectacle.Service.SpectacleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -37,5 +40,27 @@ public class SpectacleController {
     public void delete(@PathVariable Long id) {
         spectacleService.deleteSpectacle(id);
     }
+
+    @GetMapping("/byTitreAndLieu")
+    public List<Spectacle> getSpectaclesByTitreAndLieu(
+            @RequestParam String titre,
+            @RequestParam Long idLieu
+    ) {
+        return spectacleService.getSpectaclesByTitreAndIdLieu(titre, idLieu);
+    }
+
+    @GetMapping("/grouped")
+    public List<SpectacleGroupDTO> getGroupedSpectacles() {
+        return spectacleService.getGroupedSpectacles();
+    }
+
+    @GetMapping("/grouped-by-titre")
+    public ResponseEntity<List<SpectacleGroupedByTitreDto>> getSpectaclesGroupedByTitre() {
+        List<SpectacleGroupedByTitreDto> result = spectacleService.getSpectaclesGroupedByTitre();
+        return ResponseEntity.ok(result);
+    }
+
+
+
 }
 

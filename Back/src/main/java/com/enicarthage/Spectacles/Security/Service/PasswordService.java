@@ -24,8 +24,8 @@ public class PasswordService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         String resetToken = UUID.randomUUID().toString();
-        user.setResetToken(resetToken);
-        user.setTokenExpiryDate(LocalDateTime.now().plusHours(1));
+       /** user.setResetToken(resetToken);
+        user.setTokenExpiryDate(LocalDateTime.now().plusHours(1));**/
         userRepository.save(user);
 
         emailService.sendPasswordResetEmail(user.getEmail(), resetToken);
@@ -33,16 +33,16 @@ public class PasswordService {
     }
 
     public void resetPassword(String token, String newPassword) {
-        User user = userRepository.findByResetToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid token"));
+       /** User user = userRepository.findByResetToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));**/
 
-        if (user.getTokenExpiryDate().isBefore(LocalDateTime.now())) {
+     /**   if (user.getTokenExpiryDate().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Token expired");
         }
 
         user.setMotDePasse(passwordEncoder.encode(newPassword));
         user.setResetToken(null);
-        user.setTokenExpiryDate(null);
-        userRepository.save(user);
+        user.setTokenExpiryDate(null);**/
+      //  userRepository.save(user);
     }
 }

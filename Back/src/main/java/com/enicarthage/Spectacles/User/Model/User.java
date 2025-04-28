@@ -21,8 +21,11 @@ import lombok.NoArgsConstructor;
 public class User implements UserDetails {
 
     @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
     @SequenceGenerator(name = "client_seq", sequenceName = "SEQ_IDCLT", allocationSize = 1)
+  //  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_seq")
+    //@SequenceGenerator(name = "client_seq", sequenceName = "SEQ_IDCLT", allocationSize = 1)
     @Column(name = "IDCLT")
     private Long id;
 
@@ -41,14 +44,14 @@ public class User implements UserDetails {
     @Column(name = "MOTP", nullable = false)
     private String motDePasse;
 
-    @Column(name = "RESET_TOKEN")
+   /** @Column(name = "RESET_TOKEN")
     private String resetToken;
 
     @Column(name = "TOKEN_EXPIRY_DATE")
-    private LocalDateTime tokenExpiryDate;
+    private LocalDateTime tokenExpiryDate;**/
 
     // Getters et Setters pour les nouveaux champs
-    public String getResetToken() {
+    /*public String getResetToken() {
         return resetToken;
     }
 
@@ -62,7 +65,7 @@ public class User implements UserDetails {
 
     public void setTokenExpiryDate(LocalDateTime tokenExpiryDate) {
         this.tokenExpiryDate = tokenExpiryDate;
-    }
+    }*/
 
     // Implémentation des méthodes de UserDetails
     @Override

@@ -51,14 +51,15 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userRepository.findByEmail(request.email())
                 .orElse(null);
-
+        System.out.println("User  ++ "+user.toString());
         if (user == null || !user.getMotDePasse().equals(request.motp())) {
             return ResponseEntity.status(401).body("Email ou mot de passe incorrect");
         }
+        System.out.println("user "+ user.toString());
 
         return ResponseEntity.ok(Map.of(
                 "message", "Connexion réussie",
-                "user", Map.of(
+                "client", Map.of(
                         "id", user.getId(),
                         "nom", user.getNom(),
                         "prenom", user.getPrenom(),

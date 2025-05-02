@@ -38,18 +38,22 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getMotDePasse()
-                )
-        );
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
-        var jwtToken = jwtUtil.generateToken(user.getEmail());
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+    public User authenticate(AuthenticationRequest request) {
+        // 1. Vérifier que l'email et le mot de passe ne sont pas null
+        if (request.getEmail() == null || request.getMotDePasse() == null) {
+            throw new RuntimeException("Email et mot de passe sont requis");
+        }
+
+        // 2. Rechercher l'utilisateur par email
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
+        // 3. Vérifier si le mot de passe correspond (comparaison directe non sécurisée)
+        if (!user.getMotDePasse().equals(request.getMotDePasse())) {
+            throw new RuntimeException("Mot de passe incorrect");
+        }
+
+        // 4. Retourner l'utilisateur authentifié
+        return user;
     }
 }
